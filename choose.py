@@ -9,12 +9,19 @@ def make_bubble(choices):
             "type": "button",
             "style": "secondary",
             "height": "md",
-            "action": {"type": "message","label": choices[idx],"text": "就跟你說我選"},
+            "action": {
+                "type": "postback",
+                "label": choices[idx],
+                "data": '可惜了，這就是命',
+                "displayText": "殘念～原來是抽到"
+                },
             "offsetBottom": "sm",
             }
-        content["action"]["text"] += ' ' + choices[idx]
+        content["action"]["displayText"] += ' ' + choices[idx]
         if idx == choice_idx:
             content["style"] = "primary"
-            content["action"]["text"] = '是的我就是選 ' + choices[idx]
+            content["action"]["data"] = '恭喜恭喜'
+            content["action"]["displayText"] = '太好了抽到 ' + choices[idx]
         bubble["body"]["contents"].append(content)
+        
     return bubble, choices[choice_idx]

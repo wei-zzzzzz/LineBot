@@ -1,6 +1,6 @@
 import os
 import json
-import random
+from choose import make_bubble 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import  *
@@ -13,13 +13,24 @@ def lambda_handler(event, context):
     def handle_message(event):
         if event.message.type != 'text':
             reply_message = '給我幾個選項吧～'
+            messages = TextSendMessage(text=reply_message)
         else:
             if event.message.text[:2] == '選項': 
                 choices = event.message.text[3:].split(' ')
-                reply_message = '我選 '+choices[random.randint(0, len(choices)-1)]
+                bubble, choice = make_bubble(choices)
+                reply_message = '我選 '+choice
+                messages = [TextSendMessage(text=reply_message), FlexSendMessage(alt_text='抽出來拉', contents=bubble)]
             else:
                 reply_message = '給我幾個選項吧～'
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_message))
+                messages = TextSendMessage(text=reply_message)
+        line_bot_api.reply_message(event.reply_token, messages)
+    # flex message postback
+    @handler.add(PostbackEvent)
+    def handle_message(event):
+        
+        messages = TextSendMessage(text=event.postback.data)
+        # reply_arr = [message, image_message]
+        line_bot_api.reply_message(event.reply_token, messages)
     
     # 一加入群組的發言
     @handler.add(JoinEvent)

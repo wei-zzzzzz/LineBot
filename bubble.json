@@ -1,10 +1,11 @@
 {
   "type": "bubble",
+  "size": "kilo",
   "hero": {
     "type": "image",
     "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
     "size": "full",
-    "aspectRatio": "20:13",
+    "aspectRatio": "4:3",
     "aspectMode": "cover",
     "action": {
       "type": "uri",
@@ -15,8 +16,7 @@
     "type": "box",
     "layout": "vertical",
     "spacing": "sm",
-    "contents": [
-    ],
+    "contents": [],
     "flex": 0
   }
 }
