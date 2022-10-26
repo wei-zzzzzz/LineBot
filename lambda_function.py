@@ -19,15 +19,15 @@ def lambda_handler(event, context):
                 choices = event.message.text[3:].split(' ')
                 bubble, choice = make_bubble(choices)
                 reply_message = '我選 '+choice
-                messages = [TextSendMessage(text=reply_message), FlexSendMessage(alt_text='抽出來拉', contents=bubble)]
+                messages = [FlexSendMessage(alt_text='抽出來拉', contents=bubble), TextSendMessage(text=reply_message)]
             else:
                 reply_message = '給我幾個選項吧～'
                 messages = TextSendMessage(text=reply_message)
         line_bot_api.reply_message(event.reply_token, messages)
+    
     # flex message postback
     @handler.add(PostbackEvent)
     def handle_message(event):
-        
         messages = TextSendMessage(text=event.postback.data)
         # reply_arr = [message, image_message]
         line_bot_api.reply_message(event.reply_token, messages)
