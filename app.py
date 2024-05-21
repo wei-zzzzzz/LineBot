@@ -1,6 +1,7 @@
 import os
 import json
-from choose import make_bubble 
+from choose import make_bubble
+from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import  *
