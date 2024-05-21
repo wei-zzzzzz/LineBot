@@ -8,7 +8,7 @@ from linebot.models import  *
 
 line_bot_api = LineBotApi(os.environ['LINE_CHANNEL_ACCESS_TOKEN'])
 handler = WebhookHandler(os.environ['LINE_CHANNEL_SECRET'])
-
+app = Flask(__name__)
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST','GET'])
