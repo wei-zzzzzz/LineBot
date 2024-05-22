@@ -9,10 +9,11 @@ from linebot.models import  *
 line_bot_api = LineBotApi(os.environ['LINE_CHANNEL_ACCESS_TOKEN'])
 handler = WebhookHandler(os.environ['LINE_CHANNEL_SECRET'])
 app = Flask(__name__)
-
+print("aaa")
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST','GET'])
 def callback():
+    print("bb")
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
     # get request body as text
@@ -35,7 +36,7 @@ def callback():
 @handler.add(MessageEvent)
 def handle_message(event):
     # event->使用者資料
-    
+    print("cc")
     message = TextSendMessage(text='Hi')
     line_bot_api.reply_message(event.reply_token, message)
 
