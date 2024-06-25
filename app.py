@@ -1,6 +1,6 @@
 import os
 import json
-form getInfomation import get_parent
+from getInfomation import get_parent
 from choose import make_bubble
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
