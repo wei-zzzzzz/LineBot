@@ -1,6 +1,6 @@
 import os
 import json
-import getInfomation
+form getInfomation import get_parent
 from choose import make_bubble
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
@@ -39,7 +39,7 @@ def callback():
 @handler.add(MessageEvent)
 def handle_message(event):
     # event->使用者資料
-    parent = getInfomation(event.message.text)
+    parent = get_parent(event.message.text)
     if parent:
         message = TextSendMessage(text=parent)
     else:
