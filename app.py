@@ -36,6 +36,7 @@ def callback():
     try:
         print(body, signature)
         handler.handle(body, signature)
+        line_bot_api.push_message("U5a24e475af75ef9f17e6c12877b10539", TextSendMessage(text=message))
     except InvalidSignatureError:
         abort(400)
     return 'OK'
