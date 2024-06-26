@@ -13,7 +13,7 @@ def get_parent(studentName):
 def get_info(studentName):
     information = load_data()
     if len(information[information["student"]==studentName]) > 0:
-        return information[information["student"]==studentName][0]
+        return information[information["student"]==studentName]
     return None
 
 if __name__ == '__main__':

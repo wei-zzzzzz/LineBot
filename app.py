@@ -18,7 +18,7 @@ def sendMessage(username):
   
     df = get_info(username)
     message = f'早安先生/女士，您的小孩已到校～'
-    print(str(df["parents"][0]))
+    print(type(df["parents"][0]))
     line_bot_api.push_message("U5a24e475af75ef9f17e6c12877b10539", TextSendMessage(text=message))
     # line_bot_api.push_message(str(df["userID"][0]), TextSendMessage(text=message)) {str(df["parents"][0])} {str(df["student"][0])}
 
