@@ -17,8 +17,12 @@ handler = WebhookHandler(os.environ['LINE_CHANNEL_SECRET'])
 def sendMessage(username):
   try:
     df = get_info(username)
-    message = f'早安{str(df["parents"][0])}先生/女士，您的小孩{str(df["student"][0])}已到校～'
-    line_bot_api.push_message(str(df["userID"][0]), TextSendMessage(text=message))
+    message = f'早安先生/女士，您的小孩已到校～'
+    print(str(df["parents"][0]))
+    line_bot_api.push_message("U5a24e475af75ef9f17e6c12877b10539", TextSendMessage(text=message))
+    # line_bot_api.push_message(str(df["userID"][0]), TextSendMessage(text=message)) {str(df["parents"][0])} {str(df["student"][0])}
+
+
     return 'OK'
   except:
     print('error')
