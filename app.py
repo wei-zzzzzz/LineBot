@@ -1,6 +1,6 @@
 import os
 import json
-from getInfomation import get_parent
+from getInfomation import get_parent, get_info
 from choose import make_bubble
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
@@ -13,6 +13,15 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.environ['LINE_CHANNEL_ACCESS_TOKEN'])
 handler = WebhookHandler(os.environ['LINE_CHANNEL_SECRET'])
 
+@app.route("/<username>")
+def sendMessage(username):
+  try:
+    df = get_info(username)
+    message = f'早安{df["parents"]}先生/女士，您的小孩{df["student"]}已到校～'
+    line_bot_api.push_message(df["userID"], TextSendMessage(text=message))
+    return 'OK'
+  except:
+    print('error')
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST','GET'])

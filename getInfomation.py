@@ -10,6 +10,11 @@ def get_parent(studentName):
         return str(information[information["student"]==studentName]["parents"][0])
     return None
 
+def get_info(studentName):
+    information = load_data()
+    if len(information[information["student"]==studentName]) > 0:
+        return information[information["student"]==studentName][0]
+    return None
 
 if __name__ == '__main__':
     get_parent("丞嘉")
