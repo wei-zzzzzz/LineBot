@@ -13,9 +13,8 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.environ['LINE_CHANNEL_ACCESS_TOKEN'])
 handler = WebhookHandler(os.environ['LINE_CHANNEL_SECRET'])
 
-@app.route("/<username>")
+@app.route("/<username>", methods=['GET'])
 def sendMessage(username):
-  
     df = get_info(username)
     message = f'早安先生/女士，您的小孩已到校～'
     print(type(df["parents"][0]))
@@ -34,9 +33,8 @@ def callback():
     app.logger.info("Request body: " + body)
     # handle webhook body
     try:
-        print(body, signature)
         handler.handle(body, signature)
-        line_bot_api.push_message("U5a24e475af75ef9f17e6c12877b10539", TextSendMessage(text=message))
+        
     except InvalidSignatureError:
         abort(400)
     return 'OK'
